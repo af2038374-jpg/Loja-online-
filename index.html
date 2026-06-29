@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loja Profissional</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f2f4f8;
+}
+
+header {
+    background: #111;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    padding: 15px;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1e7e34;
+}
+
+.checkout {
+    background: white;
+    padding: 15px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🏪 Loja Profissional Online
+</header>
+
+<div class="container">
+
+    <!-- PRODUTO -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+
+        <h3>Tênis Moderno</h3>
+        <p>Alta qualidade e conforto</p>
+        <h2>12.000 Kz</h2>
+
+        <button onclick="addToCart()">Adicionar ao Carrinho</button>
+    </div>
+
+    <!-- CHECKOUT -->
+    <div class="checkout">
+        <h3>Checkout</h3>
+
+        <p>Itens: <span id="items">0</span></p>
+        <p>Total: <span id="total">0</span> Kz</p>
+
+        <input id="name" placeholder="Nome completo">
+        <input id="phone" placeholder="Telefone">
+
+        <button onclick="finalizar()">Finalizar Compra</button>
+
+        <p id="msg"></p>
+    </div>
+
+</div>
+
+<script>
+let items = 0;
+let total = 0;
+
+function addToCart() {
+    items++;
+    total += 12000;
+
+    document.getElementById("items").innerText = items;
+    document.getElementById("total").innerText = total;
+}
+
+function finalizar() {
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+
+    if (!name || !phone) {
+        document.getElementById("msg").innerText = "Preenche todos os campos!";
+        return;
+    }
+
+    fetch("http://localhost:3000/pedido", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,
+            phone,
+            total
+        })
+    });
+
+    document.getElementById("msg").innerText =
+        "✔ Pedido enviado com sucesso!";
+}
+</script>
+
+</body>
+</html>
