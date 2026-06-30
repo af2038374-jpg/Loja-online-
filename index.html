@@ -1,58 +1,175 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Profissional</title>
-    <style>
-        body { font-family: Arial; padding: 20px; background: #f5f5f5; max-width: 600px; margin: 0 auto; }
-        .produto { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        button { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        input { padding: 10px; margin: 5px 0; width: 100%; box-sizing: border-box; border: 1px solid #ddd; border-radius: 5px; }
-        #msg { margin-top: 10px; font-weight: bold; }
-        h1 { color: #333; text-align: center; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Loja</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+margin:0;
+padding:0;
+}
+
+header{
+background:#25D366;
+color:white;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.produto{
+background:white;
+border-radius:10px;
+padding:15px;
+margin-bottom:20px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.produto img{
+width:100%;
+max-height:220px;
+object-fit:cover;
+border-radius:8px;
+}
+
+h3{
+margin-top:10px;
+}
+
+button{
+background:#25D366;
+color:white;
+border:none;
+padding:12px;
+border-radius:6px;
+cursor:pointer;
+width:100%;
+font-size:16px;
+margin-top:10px;
+}
+
+button:hover{
+background:#1ea952;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+#msg{
+margin-top:15px;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+padding:20px;
+color:#666;
+}
+</style>
+
 </head>
 <body>
-    <h1>🛒 Minha Loja</h1>
-    <div class="produto">
-        <h3>Camiseta Básica</h3>
-        <p>Preço: 5.000 Kz</p>
-        <button onclick="comprar('Camiseta Básica', 5000)">Comprar no WhatsApp</button>
-    </div>
-    <div class="produto">
-        <h3>Tênis Esportivo</h3>
-        <p>Preço: 15.000 Kz</p>
-        <button onclick="comprar('Tênis Esportivo', 15000)">Comprar no WhatsApp</button>
-    </div>
-    <h3>Finalizar Pedido</h3>
-    <input type="text" id="nome" placeholder="Seu nome completo">
-    <input type="text" id="telefone" placeholder="Seu WhatsApp">
-    <button onclick="enviarPedido()">Enviar Pedido</button>
-    <p id="msg"></p>
-    <script>
-        let produto = '';
-        let preco = 0;
-        function comprar(nome, valor) {
-            produto = nome;
-            preco = valor;
-            document.getElementById('msg').innerText = `Selecionado: ${nome} - ${valor} Kz`;
-            document.getElementById('msg').style.color = 'blue';
-        }
-        function enviarPedido() {
-            let name = document.getElementById('nome').value;
-            let phone = document.getElementById('telefone').value;
-            if(!name || !phone || preco === 0){
-                document.getElementById('msg').innerText = "Preenche nome, WhatsApp e escolhe produto!";
-                document.getElementById('msg').style.color = 'red';
-                return;
-            }
-            const texto = `Olá! Quero comprar:%0AProduto: ${produto}%0APreço: ${preco} Kz%0ANome: ${name}%0ATel: ${phone}`;
-            const url = `}`https://wa.me/244974114272?text=${texto}
-            document.getElementById('msg').innerText = "✔ Redirecionando pro WhatsApp...";
-            document.getElementById('msg').style.color = 'green';
-            window.open(url, '_blank');
-        }
-    </script>
+
+<header>
+🛒 Minha Loja Online
+</header>
+
+<div class="container">
+
+<div class="produto">
+<img src="https://via.placeholder.com/600x300?text=Camiseta" alt="">
+<h3>Camiseta Básica</h3>
+<p>Preço: <strong>5.000 Kz</strong></p>
+<button onclick="comprar('Camiseta Básica',5000)">Comprar</button>
+</div>
+
+<div class="produto">
+<img src="https://via.placeholder.com/600x300?text=Tenis" alt="">
+<h3>Tênis Esportivo</h3>
+<p>Preço: <strong>15.000 Kz</strong></p>
+<button onclick="comprar('Tênis Esportivo',15000)">Comprar</button>
+</div>
+
+<div class="produto">
+<img src="https://via.placeholder.com/600x300?text=Mochila" alt="">
+<h3>Mochila Escolar</h3>
+<p>Preço: <strong>8.000 Kz</strong></p>
+<button onclick="comprar('Mochila Escolar',8000)">Comprar</button>
+</div>
+
+<h2>Finalizar Pedido</h2>
+
+<input type="text" id="nome" placeholder="Seu nome">
+
+<input type="text" id="telefone" placeholder="Seu WhatsApp">
+
+<button onclick="enviarPedido()">Enviar Pedido</button>
+
+<p id="msg"></p>
+
+</div>
+
+<footer>
+© 2026 Minha Loja
+</footer>
+
+<script>
+
+let produto="";
+let preco=0;
+
+function comprar(nome,valor){
+
+produto=nome;
+preco=valor;
+
+document.getElementById("msg").innerHTML=
+"Produto selecionado: <b>"+nome+"</b> - "+valor+" Kz";
+
+}
+
+function enviarPedido(){
+
+let nome=document.getElementById("nome").value;
+let telefone=document.getElementById("telefone").value;
+
+if(nome==""||telefone==""||produto==""){
+
+document.getElementById("msg").style.color="red";
+document.getElementById("msg").innerHTML="Preencha os dados e escolha um produto.";
+
+return;
+
+}
+
+let texto=
+"Olá! Quero fazer um pedido.%0A%0A"+
+"Produto: "+produto+
+"%0APreço: "+preco+" Kz"+
+"%0ANome: "+nome+
+"%0ATelefone: "+telefone;
+
+window.open("https://wa.me/244974114272?text="+texto,"_blank");
+
+}
+
+</script>
+
 </body>
 </html>
