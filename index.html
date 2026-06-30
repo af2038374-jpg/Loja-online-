@@ -1,58 +1,58 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loja Online Simples</title>
-  <style>
-    body { font-family: Arial; padding: 20px; background: #f5f5f5; }
-    .produto { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    button { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; cursor: pointer; }
-    input { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
-    #msg { margin-top: 10px; color: green; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Profissional</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; max-width: 600px; margin: 0 auto; }
+        .produto { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        button { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        input { padding: 10px; margin: 5px 0; width: 100%; box-sizing: border-box; border: 1px solid #ddd; border-radius: 5px; }
+        #msg { margin-top: 10px; font-weight: bold; }
+        h1 { color: #333; text-align: center; }
+    </style>
 </head>
 <body>
-  <h1>🛒 Minha Loja</h1>
-  
-  <div class="produto">
-    <h3>Camiseta Básica</h3>
-    <p>Preço: 5000 Kz</p>
-    <button onclick="comprar('Camiseta Básica', 5000)">Comprar no WhatsApp</button>
-  </div>
-
-  <div class="produto">
-    <h3>Tênis Esportivo</h3>
-    <p>Preço: 15000 Kz</p>
-    <button onclick="comprar('Tênis Esportivo', 15000)">Comprar no WhatsApp</button>
-  </div>
-
-  <h3>Seus Dados</h3>
-  <input id="name" placeholder="Seu nome">
-  <input id="phone" placeholder="Seu WhatsApp">
-  
-  <div id="msg"></div>
-
-  <script>
-    const SEU_NUMERO_WHATSAPP = "2449XXXXXXXX"; // <-- COLA AQUI TEU NUMERO COM 2449...
-
-    function comprar(produto, preco) {
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      
-      if (!name || !phone) {
-        document.getElementById("msg").innerText = "Preenche nome e WhatsApp!";
-        document.getElementById("msg").style.color = "red";
-        return;
-      }
-
-      const texto = `Olá! Quero comprar:%0A${produto}%0APreço: ${preco} Kz%0ANome: ${name}%0ATel: ${phone}`;
-      const url = `https://wa.me/${SEU_NUMERO_WHATSAPP}?text=${texto}`;
-      
-      document.getElementById("msg").innerText = "✔ Redirecionando pro WhatsApp...";
-      document.getElementById("msg").style.color = "green";
-      window.open(url, '_blank');
-    }
-  </script>
+    <h1>🛒 Minha Loja</h1>
+    <div class="produto">
+        <h3>Camiseta Básica</h3>
+        <p>Preço: 5.000 Kz</p>
+        <button onclick="comprar('Camiseta Básica', 5000)">Comprar no WhatsApp</button>
+    </div>
+    <div class="produto">
+        <h3>Tênis Esportivo</h3>
+        <p>Preço: 15.000 Kz</p>
+        <button onclick="comprar('Tênis Esportivo', 15000)">Comprar no WhatsApp</button>
+    </div>
+    <h3>Finalizar Pedido</h3>
+    <input type="text" id="nome" placeholder="Seu nome completo">
+    <input type="text" id="telefone" placeholder="Seu WhatsApp">
+    <button onclick="enviarPedido()">Enviar Pedido</button>
+    <p id="msg"></p>
+    <script>
+        let produto = '';
+        let preco = 0;
+        function comprar(nome, valor) {
+            produto = nome;
+            preco = valor;
+            document.getElementById('msg').innerText = `Selecionado: ${nome} - ${valor} Kz`;
+            document.getElementById('msg').style.color = 'blue';
+        }
+        function enviarPedido() {
+            let name = document.getElementById('nome').value;
+            let phone = document.getElementById('telefone').value;
+            if(!name || !phone || preco === 0){
+                document.getElementById('msg').innerText = "Preenche nome, WhatsApp e escolhe produto!";
+                document.getElementById('msg').style.color = 'red';
+                return;
+            }
+            const texto = `Olá! Quero comprar:%0AProduto: ${produto}%0APreço: ${preco} Kz%0ANome: ${name}%0ATel: ${phone}`;
+            const url = `https://wa.me/244000000000?text=${texto}`;
+            document.getElementById('msg').innerText = "✔ Redirecionando pro WhatsApp...";
+            document.getElementById('msg').style.color = 'green';
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
